@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Créer une promotion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'promotions/css/promotion.css' %}">
+</head>
+
+<body>
+<div class="page">
+    <div class="background-orbit"></div>
+
+    <header class="header">
+        <div class="logo">Gestion<span>Promo</span></div>
+        <div class="year-badge">
+            <span>Année courante</span>
+            <strong>{{ current_year }}</strong>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="card">
+            <div class="card-left">
+                <h1>Nouvelle promotion</h1>
+                <p class="subtitle">
+                    Crée une promotion unique pour une année donnée.
+                </p>
+
+                <ul class="steps">
+                    <li class="active"><span>1</span> Informations de base</li>
+                    <li><span>2</span> Détails & validation</li>
+                    <li><span>3</span> Confirmation</li>
+                </ul>
+
+                <div class="promo-preview">
+                    <div class="preview-year" id="preview-year">20••</div>
+                    <div class="preview-name" id="preview-name">Nom de la promotion</div>
+                    <div class="preview-code" id="preview-code">CODE-XXX</div>
+                </div>
+            </div>
+
+            <div class="card-right">
+                <form
+    id="promotion-form"
+    method="post"
+    action="{% url 'promotions:promotion_create' %}"
+    novalidate
+>
+
+                    {% csrf_token %}
+
+                    <div class="field-group">
+                        <label for="year">Année de la promotion</label>
+                        <div class="field-inline">
+                            <input
+                                type="number"
+                                id="year"
+                                name="year"
+                                required
+                                min="2000"
+                                max="{{ current_year|add:'10' }}"
+                                placeholder="{{ current_year }}"
+                            />
+                            <button type="button" class="btn-ghost" id="btn-current-year">
+                                Utiliser {{ current_year }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="name">Intitulé</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            required
+                            maxlength="150"
+                            placeholder="Licence Informatique 3"
+                        />
+                    </div>
+
+                    <div class="field-group">
+                        <label for="code">Code</label>
+                        <div class="field-inline">
+                            <input
+                                type="text"
+                                id="code"
+                                name="code"
+                                required
+                                maxlength="50"
+                            />
+                            <button type="button" class="btn-ghost" id="btn-generate-code">
+                                Générer
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="3"></textarea>
+                    </div>
+
+                    <div class="actions">
+                        <button type="submit" class="btn-primary" id="submit-btn">
+                            Créer la promotion
+                        </button>
+                        <span class="live-status" id="live-status">
+                            Saisie en attente…
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        Prototype UI • Gestion des promotions
+    </footer>
+</div>
+
+<script src="{% static 'promotions/js/promotion.js' %}"></script>
+</body>
+</html>

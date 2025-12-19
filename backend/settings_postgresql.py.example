@@ -1,0 +1,24 @@
+"""
+Configuration Django pour PostgreSQL
+Copiez ce fichier vers settings.py et configurez vos paramètres PostgreSQL
+"""
+from pathlib import Path
+import os
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Configuration PostgreSQL
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'projet_sil3',  # Nom de votre base de données
+        'USER': 'votre_utilisateur',  # Votre utilisateur PostgreSQL
+        'PASSWORD': 'votre_mot_de_passe',  # Votre mot de passe
+        'HOST': 'localhost',  # Ou l'adresse de votre serveur PostgreSQL
+        'PORT': '5432',  # Port par défaut de PostgreSQL
+    }
+}
+
+# Pour installer le driver PostgreSQL:
+# pip install psycopg2-binary
+

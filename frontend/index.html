@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Gestion des Espaces Pédagogiques</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Gestion des Espaces Pédagogiques</h1>
+            <p>Système de gestion pour les espaces pédagogiques - Projet SIL3</p>
+        </header>
+
+        <main style="text-align: center; padding: 40px 20px;">
+            <h2>Bienvenue dans le système de gestion</h2>
+            <p style="color: #7f8c8d; font-size: 1.1em; margin-bottom: 40px;">
+                Gérez vos espaces pédagogiques et assignez des formateurs facilement
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px;">
+                <a href="creer-espace.html" class="nav-btn" style="padding: 30px; text-decoration: none; display: block;">
+                    <div style="font-size: 3em; margin-bottom: 15px;">➕</div>
+                    <div style="font-weight: 600; margin-bottom: 10px;">Créer un Espace</div>
+                    <div style="font-size: 0.9em; opacity: 0.8;">Créer un nouvel espace pédagogique vide</div>
+                </a>
+
+                <a href="liste-espaces.html" class="nav-btn" style="padding: 30px; text-decoration: none; display: block;">
+                    <div style="font-size: 3em; margin-bottom: 15px;">📋</div>
+                    <div style="font-weight: 600; margin-bottom: 10px;">Liste des Espaces</div>
+                    <div style="font-size: 0.9em; opacity: 0.8;">Voir tous les espaces pédagogiques</div>
+                </a>
+
+                <a href="ajouter-formateur.html" class="nav-btn" style="padding: 30px; text-decoration: none; display: block;">
+                    <div style="font-size: 3em; margin-bottom: 15px;">👤</div>
+                    <div style="font-weight: 600; margin-bottom: 10px;">Ajouter Formateur</div>
+                    <div style="font-size: 0.9em; opacity: 0.8;">Assigner un formateur à un espace</div>
+                </a>
+
+                <a href="creer-formateur.html" class="nav-btn" style="padding: 30px; text-decoration: none; display: block;">
+                    <div style="font-size: 3em; margin-bottom: 15px;">➕👤</div>
+                    <div style="font-weight: 600; margin-bottom: 10px;">Créer Formateur</div>
+                    <div style="font-size: 0.9em; opacity: 0.8;">Créer un nouveau formateur</div>
+                </a>
+            </div>
+
+            <div style="margin-top: 50px; padding: 30px; background: var(--light-color); border-radius: var(--border-radius);">
+                <h3>Épics développés</h3>
+                <div style="text-align: left; max-width: 600px; margin: 20px auto;">
+                    <p style="margin-bottom: 15px;">
+                        <strong>✅ Epic 1:</strong> Création d'un espace pédagogique vide pour une matière
+                    </p>
+                    <p>
+                        <strong>✅ Epic 2:</strong> Insertion d'un formateur dans un espace pédagogique
+                    </p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
+

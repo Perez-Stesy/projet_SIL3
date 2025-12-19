@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Espaces Pédagogiques - Projet SIL3</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Gestion des Espaces Pédagogiques</h1>
+            <p>Système de gestion pour les espaces pédagogiques</p>
+        </header>
+
+        <nav>
+            <a href="creer-espace.html" class="nav-btn">Créer un Espace</a>
+            <a href="liste-espaces.html" class="nav-btn active">Liste des Espaces</a>
+            <a href="ajouter-formateur.html" class="nav-btn">Ajouter Formateur</a>
+            <a href="creer-formateur.html" class="nav-btn">Créer Formateur</a>
+        </nav>
+
+        <main>
+            <h2>Liste des Espaces Pédagogiques</h2>
+            
+            <div id="message-container"></div>
+            <div id="loading" class="text-center mt-20">
+                <p>Chargement des espaces...</p>
+            </div>
+            <div id="espaces-container" class="espaces-list"></div>
+            <div id="empty-message" class="hidden text-center mt-20">
+                <p style="color: #7f8c8d; font-size: 1.1em;">
+                    Aucun espace pédagogique créé pour le moment.
+                </p>
+                <a href="creer-espace.html" class="nav-btn mt-20" style="display: inline-block;">
+                    Créer le premier espace
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8000/api';
+
+        // Gestion des messages
+        function showMessage(message, type = 'success') {
+            const container = document.getElementById('message-container');
+            container.innerHTML = `
+                <div class="message message-${type}">
+                    <span>${type === 'success' ? '✅' : '❌'}</span>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 5000);
+        }
+
+        // Formater la date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('fr-FR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Charger les espaces pédagogiques
+        async function loadEspaces() {
+            const loading = document.getElementById('loading');
+            const container = document.getElementById('espaces-container');
+            const emptyMessage = document.getElementById('empty-message');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/espaces/`);
+                const data = await response.json();
+
+                loading.classList.add('hidden');
+
+                if (response.ok && data.success && data.data.length > 0) {
+                    container.innerHTML = data.data.map(espace => `
+                        <div class="espace-card" onclick="viewEspace(${espace.id})">
+                            <h3>${espace.matiere}</h3>
+                            <div class="code">Code: ${espace.code}</div>
+                            ${espace.description ? `<div class="description">${espace.description}</div>` : ''}
+                            <div class="meta">
+                                <span>👥 ${espace.nombre_formateurs} formateur(s)</span>
+                                <span>📅 ${formatDate(espace.date_creation)}</span>
+                            </div>
+                        </div>
+                    `).join('');
+                    emptyMessage.classList.add('hidden');
+                } else {
+                    container.innerHTML = '';
+                    emptyMessage.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                loading.classList.add('hidden');
+                showMessage('Erreur de connexion au serveur. Vérifiez que le serveur Django est démarré.', 'error');
+            }
+        }
+
+        // Voir les détails d'un espace
+        function viewEspace(espaceId) {
+            window.location.href = `detail-espace.html?id=${espaceId}`;
+        }
+
+        // Charger au démarrage
+        loadEspaces();
+    </script>
+</body>
+</html>
+

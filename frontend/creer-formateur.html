@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Formateur - Projet SIL3</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Gestion des Espaces Pédagogiques</h1>
+            <p>Système de gestion pour les espaces pédagogiques</p>
+        </header>
+
+        <nav>
+            <a href="creer-espace.html" class="nav-btn">Créer un Espace</a>
+            <a href="liste-espaces.html" class="nav-btn">Liste des Espaces</a>
+            <a href="ajouter-formateur.html" class="nav-btn">Ajouter Formateur</a>
+            <a href="creer-formateur.html" class="nav-btn active">Créer Formateur</a>
+        </nav>
+
+        <main>
+            <h2>Créer un Nouveau Formateur</h2>
+            <p style="color: #7f8c8d; margin-bottom: 30px;">
+                Créez un nouveau formateur qui pourra être assigné aux espaces pédagogiques
+            </p>
+
+            <div id="message-container"></div>
+
+            <form id="form-creer-formateur">
+                <div class="form-group">
+                    <label for="nom">Nom *</label>
+                    <input 
+                        type="text" 
+                        id="nom" 
+                        name="nom" 
+                        placeholder="Ex: votre nom"
+                        required
+                        minlength="2"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="prenom">Prénom *</label>
+                    <input 
+                        type="text" 
+                        id="prenom" 
+                        name="prenom" 
+                        placeholder="Ex:votre prénom" "
+                        required
+                        minlength="2"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Ex: votre.email@example.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="telephone">Téléphone (optionnel)</label>
+                    <input 
+                        type="tel" 
+                        id="telephone" 
+                        name="telephone" 
+                        placeholder="Ex: 01 40 40 40 40"
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="btn-submit">
+                    Créer le Formateur
+                </button>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8000/api';
+
+        // Gestion des messages
+        function showMessage(message, type = 'success') {
+            const container = document.getElementById('message-container');
+            container.innerHTML = `
+                <div class="message message-${type}">
+                    <span>${type === 'success' ? '✅' : '❌'}</span>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 5000);
+        }
+
+        // Gestion du formulaire
+        document.getElementById('form-creer-formateur').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const btnSubmit = document.getElementById('btn-submit');
+            const originalText = btnSubmit.innerHTML;
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<span class="loading"></span> Création en cours...';
+
+            const formData = {
+                nom: document.getElementById('nom').value.trim(),
+                prenom: document.getElementById('prenom').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                telephone: document.getElementById('telephone').value.trim() || null
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/formateurs/creer/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showMessage(data.message || 'Formateur créé avec succès!', 'success');
+                    // Réinitialiser le formulaire
+                    document.getElementById('form-creer-formateur').reset();
+                } else {
+                    const errorMsg = data.errors 
+                        ? Object.values(data.errors).flat().join(', ')
+                        : data.message || 'Erreur lors de la création';
+                    showMessage(errorMsg, 'error');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                showMessage('Erreur de connexion au serveur. Vérifiez que le serveur Django est démarré.', 'error');
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = originalText;
+            }
+        });
+    </script>
+</body>
+</html>
+

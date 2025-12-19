@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Formateur - Projet SIL3</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Gestion des Espaces Pédagogiques</h1>
+            <p>Système de gestion pour les espaces pédagogiques</p>
+        </header>
+
+        <nav>
+            <a href="creer-espace.html" class="nav-btn">Créer un Espace</a>
+            <a href="liste-espaces.html" class="nav-btn">Liste des Espaces</a>
+            <a href="ajouter-formateur.html" class="nav-btn active">Ajouter Formateur</a>
+            <a href="creer-formateur.html" class="nav-btn">Créer Formateur</a>
+        </nav>
+
+        <main>
+            <h2>Ajouter un Formateur à un Espace Pédagogique</h2>
+            <p style="color: #7f8c8d; margin-bottom: 30px;">
+                Epic: Insertion d'un formateur dans un espace pédagogique
+            </p>
+
+            <div id="message-container"></div>
+
+            <form id="form-ajouter-formateur">
+                <div class="form-group">
+                    <label for="espace_id">Sélectionner l'espace pédagogique *</label>
+                    <select id="espace_id" name="espace_id" required>
+                        <option value="">-- Choisir un espace --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="formateur_id">Sélectionner le formateur *</label>
+                    <select id="formateur_id" name="formateur_id" required>
+                        <option value="">-- Choisir un formateur --</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success" id="btn-submit">
+                    Ajouter le Formateur
+                </button>
+            </form>
+
+            <div id="formateurs-espace" class="add-formateur-section hidden">
+                <h3>Formateurs déjà assignés à cet espace</h3>
+                <div id="formateurs-list" class="formateurs-list"></div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8000/api';
+
+        // Gestion des messages
+        function showMessage(message, type = 'success') {
+            const container = document.getElementById('message-container');
+            container.innerHTML = `
+                <div class="message message-${type}">
+                    <span>${type === 'success' ? '✅' : '❌'}</span>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 5000);
+        }
+
+        // Charger les espaces pédagogiques
+        async function loadEspaces() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/espaces/`);
+                const data = await response.json();
+
+                const select = document.getElementById('espace_id');
+                
+                if (response.ok && data.success) {
+                    select.innerHTML = '<option value="">-- Choisir un espace --</option>';
+                    data.data.forEach(espace => {
+                        const option = document.createElement('option');
+                        option.value = espace.id;
+                        option.textContent = `${espace.matiere} (${espace.code})`;
+                        select.appendChild(option);
+                    });
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                showMessage('Erreur lors du chargement des espaces.', 'error');
+            }
+        }
+
+        // Charger les formateurs
+        async function loadFormateurs() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/formateurs/`);
+                const data = await response.json();
+
+                const select = document.getElementById('formateur_id');
+                
+                if (response.ok && data.success) {
+                    select.innerHTML = '<option value="">-- Choisir un formateur --</option>';
+                    data.data.forEach(formateur => {
+                        const option = document.createElement('option');
+                        option.value = formateur.id;
+                        option.textContent = `${formateur.prenom} ${formateur.nom} - ${formateur.email}`;
+                        select.appendChild(option);
+                    });
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                showMessage('Erreur lors du chargement des formateurs.', 'error');
+            }
+        }
+
+        // Charger les formateurs d'un espace
+        async function loadFormateursEspace(espaceId) {
+            const section = document.getElementById('formateurs-espace');
+            const list = document.getElementById('formateurs-list');
+
+            if (!espaceId) {
+                section.classList.add('hidden');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/espaces/${espaceId}/`);
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    const formateurs = data.data.formateurs;
+                    
+                    if (formateurs.length > 0) {
+                        list.innerHTML = formateurs.map(formateur => `
+                            <div class="formateur-card">
+                                <div class="nom">${formateur.prenom} ${formateur.nom}</div>
+                                <div class="email">${formateur.email}</div>
+                            </div>
+                        `).join('');
+                        section.classList.remove('hidden');
+                    } else {
+                        section.classList.add('hidden');
+                    }
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+            }
+        }
+
+        // Écouter le changement d'espace
+        document.getElementById('espace_id').addEventListener('change', (e) => {
+            loadFormateursEspace(e.target.value);
+        });
+
+        // Gestion du formulaire
+        document.getElementById('form-ajouter-formateur').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const btnSubmit = document.getElementById('btn-submit');
+            const originalText = btnSubmit.innerHTML;
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<span class="loading"></span> Ajout en cours...';
+
+            const espaceId = document.getElementById('espace_id').value;
+            const formateurId = document.getElementById('formateur_id').value;
+
+            if (!espaceId || !formateurId) {
+                showMessage('Veuillez sélectionner un espace et un formateur.', 'error');
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = originalText;
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/espaces/${espaceId}/ajouter-formateur/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ formateur_id: parseInt(formateurId) })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showMessage(data.message || 'Formateur ajouté avec succès!', 'success');
+                    // Recharger la liste des formateurs de l'espace
+                    loadFormateursEspace(espaceId);
+                    // Réinitialiser la sélection du formateur
+                    document.getElementById('formateur_id').value = '';
+                } else {
+                    const errorMsg = data.errors 
+                        ? Object.values(data.errors).flat().join(', ')
+                        : data.message || 'Erreur lors de l\'ajout';
+                    showMessage(errorMsg, 'error');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                showMessage('Erreur de connexion au serveur. Vérifiez que le serveur Django est démarré.', 'error');
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = originalText;
+            }
+        });
+
+        // Charger au démarrage
+        loadEspaces();
+        loadFormateurs();
+    </script>
+</body>
+</html>
+

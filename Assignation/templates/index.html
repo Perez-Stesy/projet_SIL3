@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Assignations de Travaux</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Gestion des Assignations de Travaux</h1>
+            <p class="subtitle">Assignation de travaux individuels aux étudiants</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Section pour créer/assigner un travail -->
+            <section class="card assignment-section">
+                <h2>➕ Assigner un Travail à un Étudiant</h2>
+                <form id="assignmentForm" class="form">
+                    <div class="form-group">
+                        <label for="etudiantSelect">Étudiant *</label>
+                        <select id="etudiantSelect" required>
+                            <option value="">-- Sélectionner un étudiant --</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="titre">Titre du Travail *</label>
+                        <input type="text" id="titre" required placeholder="Ex: Projet de fin d'année">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description *</label>
+                        <textarea id="description" required rows="4" placeholder="Description détaillée du travail..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dateLimite">Date Limite *</label>
+                        <input type="datetime-local" id="dateLimite" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="statut">Statut</label>
+                        <select id="statut">
+                            <option value="en_attente">En attente</option>
+                            <option value="en_cours">En cours</option>
+                            <option value="termine">Terminé</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Assigner le Travail</button>
+                </form>
+            </section>
+
+            <!-- Section pour créer un étudiant -->
+            <section class="card student-section">
+                <h2>👤 Ajouter un Nouvel Étudiant</h2>
+                <form id="studentForm" class="form">
+                    <div class="form-group">
+                        <label for="nom">Nom *</label>
+                        <input type="text" id="nom" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prenom">Prénom *</label>
+                        <input type="text" id="prenom" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numeroEtudiant">Numéro d'Étudiant *</label>
+                        <input type="text" id="numeroEtudiant" required placeholder="Ex: ETU12345">
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary">Ajouter l'Étudiant</button>
+                </form>
+            </section>
+
+            <!-- Liste des travaux assignés -->
+            <section class="card assignments-list">
+                <div class="section-header">
+                    <h2>📋 Travaux Assignés</h2>
+                    <button id="refreshBtn" class="btn btn-small">🔄 Actualiser</button>
+                </div>
+                
+                <div class="filter-section">
+                    <label for="filterEtudiant">Filtrer par étudiant:</label>
+                    <select id="filterEtudiant">
+                        <option value="">-- Tous les étudiants --</option>
+                    </select>
+                </div>
+
+                <div id="assignmentsList" class="assignments-grid">
+                    <!-- Les travaux seront affichés ici dynamiquement -->
+                </div>
+
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <p>📭 Aucun travail assigné pour le moment.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>

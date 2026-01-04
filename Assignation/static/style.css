@@ -1,0 +1,342 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #50c878;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --background-color: #f5f7fa;
+    --card-background: #ffffff;
+    --text-color: #2c3e50;
+    --text-light: #7f8c8d;
+    --border-color: #e1e8ed;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, var(--primary-color), #357abd);
+    color: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.card h2 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+}
+
+.assignments-list {
+    grid-column: 1 / -1;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+}
+
+.section-header h2 {
+    margin-bottom: 0;
+    border: none;
+    padding: 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #357abd;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #45b368;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-small:hover {
+    background-color: #357abd;
+}
+
+.filter-section {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-section label {
+    font-weight: 600;
+}
+
+.filter-section select {
+    flex: 1;
+    max-width: 300px;
+    padding: 10px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.assignments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.assignment-card {
+    background: var(--card-background);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.assignment-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.assignment-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.assignment-card .student-info {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.assignment-card .description {
+    margin-bottom: 15px;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.assignment-card .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.assignment-card .date {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.assignment-card .statut {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.statut-en_attente {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.statut-en_cours {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.statut-termine {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+    font-size: 1.2rem;
+}
+
+.message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    box-shadow: var(--shadow-hover);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: all 0.3s;
+}
+
+.message.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.message.success {
+    background-color: var(--secondary-color);
+}
+
+.message.error {
+    background-color: var(--danger-color);
+}
+
+.message.info {
+    background-color: var(--primary-color);
+}
+
+@media (max-width: 1024px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .assignments-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}

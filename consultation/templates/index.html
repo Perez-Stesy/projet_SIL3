@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultation des Travaux - Étudiant</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Consultation des Travaux Assignés</h1>
+            <p class="subtitle">Consultez les travaux assignés à un étudiant</p>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <label for="numeroEtudiant">Numéro d'étudiant :</label>
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        id="numeroEtudiant" 
+                        placeholder="Entrez le numéro d'étudiant"
+                        autocomplete="off"
+                    >
+                    <button id="searchBtn" onclick="chercherTravaux()">Rechercher</button>
+                </div>
+                <div id="errorMessage" class="error-message"></div>
+            </div>
+
+            <div class="select-box">
+                <label for="selectEtudiant">Ou sélectionnez un étudiant :</label>
+                <select id="selectEtudiant" onchange="chargerTravauxParSelect()">
+                    <option value="">-- Sélectionner un étudiant --</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Chargement en cours...</p>
+        </div>
+
+        <div id="etudiantInfo" class="etudiant-info" style="display: none;">
+            <h2>Informations de l'étudiant</h2>
+            <div class="info-card">
+                <div class="info-item">
+                    <span class="label">Nom complet :</span>
+                    <span id="nomComplet" class="value"></span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Numéro d'étudiant :</span>
+                    <span id="numeroEtudiantInfo" class="value"></span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Email :</span>
+                    <span id="emailInfo" class="value"></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="travauxSection" class="travaux-section" style="display: none;">
+            <h2>Travaux assignés</h2>
+            <div id="travauxList" class="travaux-list"></div>
+            <div id="noTravaux" class="no-travaux" style="display: none;">
+                <p>Aucun travail assigné pour cet étudiant.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
+
+

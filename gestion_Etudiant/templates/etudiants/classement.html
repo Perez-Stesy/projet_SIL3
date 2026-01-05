@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Classement - {{ promotion.nom }}{% endblock %}
+
+{% block content %}
+<div class="ranking-header">
+    <div class="ranking-title-section">
+        <a href="{% url 'index' %}" class="back-button">
+            <span class="back-icon">←</span>
+            Retour
+        </a>
+        <div class="promotion-info">
+            <h1 class="ranking-title">{{ promotion.nom }}</h1>
+            <p class="ranking-subtitle">Année {{ promotion.annee }} • {{ total_etudiants }} étudiant{{ total_etudiants|pluralize }}</p>
+        </div>
+    </div>
+    <a href="{% url 'ajouter_etudiant' %}" class="btn btn-primary">
+        <span class="btn-icon">+</span>
+        Ajouter un Étudiant
+    </a>
+</div>
+
+<div class="ranking-container">
+    {% if etudiants %}
+        <div class="ranking-table-wrapper">
+            <table class="ranking-table">
+                <thead>
+                    <tr>
+                        <th class="rank-col">Rang</th>
+                        <th class="name-col">Nom & Prénom</th>
+                        <th class="num-col">Numéro</th>
+                        <th class="moyenne-col">Moyenne</th>
+                        <th class="medal-col">Médaille</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for etudiant in etudiants %}
+                        <tr class="ranking-row" data-rank="{{ etudiant.classement }}">
+                            <td class="rank-cell">
+                                <div class="rank-badge rank-{{ etudiant.classement }}">
+                                    {% if etudiant.classement == 1 %}
+                                        <span class="medal-icon">🥇</span>
+                                    {% elif etudiant.classement == 2 %}
+                                        <span class="medal-icon">🥈</span>
+                                    {% elif etudiant.classement == 3 %}
+                                        <span class="medal-icon">🥉</span>
+                                    {% else %}
+                                        <span class="rank-number">#{{ etudiant.classement }}</span>
+                                    {% endif %}
+                                </div>
+                            </td>
+                            <td class="name-cell">
+                                <div class="student-info">
+                                    <div class="student-avatar">{{ etudiant.prenom|first|upper }}{{ etudiant.nom|first|upper }}</div>
+                                    <div class="student-details">
+                                        <span class="student-name">{{ etudiant.prenom }} {{ etudiant.nom }}</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="num-cell">{{ etudiant.numero_etudiant }}</td>
+                            <td class="moyenne-cell">
+                                <div class="moyenne-display">
+                                    <span class="moyenne-value">{{ etudiant.moyenne_generale|floatformat:2 }}</span>
+                                    <div class="moyenne-bar">
+                                        <div class="moyenne-fill" style="width: {{ etudiant.moyenne_generale|floatformat:0 }}%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="medal-cell">
+                                {% if etudiant.classement == 1 %}
+                                    <span class="medal-badge gold">Or</span>
+                                {% elif etudiant.classement == 2 %}
+                                    <span class="medal-badge silver">Argent</span>
+                                {% elif etudiant.classement == 3 %}
+                                    <span class="medal-badge bronze">Bronze</span>
+                                {% else %}
+                                    <span class="medal-badge">-</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="ranking-stats">
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-info">
+                    <span class="stat-value">{{ total_etudiants }}</span>
+                    <span class="stat-label">Total Étudiants</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-info">
+                    <span class="stat-value">{{ meilleure_moyenne|floatformat:2 }}</span>
+                    <span class="stat-label">Meilleure Moyenne</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-info">
+                    <span class="stat-value">{{ moyenne_promotion|floatformat:2 }}</span>
+                    <span class="stat-label">Moyenne Promotion</span>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <h3>Aucun étudiant dans cette promotion</h3>
+            <p>Ajoutez des étudiants pour voir le classement</p>
+            <a href="{% url 'ajouter_etudiant' %}" class="btn btn-primary">Ajouter le Premier Étudiant</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/ranking.js' %}"></script>
+{% endblock %}
+

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Accueil - Gestion des Étudiants{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            <span class="title-line">Bienvenue dans le</span>
+            <span class="title-line highlight">Système de Gestion</span>
+            <span class="title-line">des Étudiants</span>
+        </h1>
+        <p class="hero-subtitle">Gérez vos promotions et suivez le classement de vos étudiants en temps réel</p>
+        <a href="{% url 'ajouter_etudiant' %}" class="btn btn-primary btn-large">
+            <span class="btn-icon">+</span>
+            Ajouter un Nouvel Étudiant
+        </a>
+    </div>
+</div>
+
+<div class="promotions-section">
+    <div class="section-header">
+        <h2 class="section-title">📚 Promotions Disponibles</h2>
+        <p class="section-subtitle">Sélectionnez une promotion pour voir le classement</p>
+    </div>
+
+    {% if promotions %}
+        <div class="promotions-grid">
+            {% for promotion in promotions %}
+                <a href="{% url 'classement_promotion' promotion.id %}" class="promotion-card" data-promotion-id="{{ promotion.id }}">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-icon">🎓</div>
+                        <h3 class="card-title">{{ promotion.nom }}</h3>
+                        <p class="card-year">Année {{ promotion.annee }}</p>
+                        <div class="card-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">{{ promotion.get_nombre_etudiants }}</span>
+                                <span class="stat-label">Étudiants</span>
+                            </div>
+                        </div>
+                        <div class="card-link">
+                            Voir le Classement
+                            <span class="link-arrow">→</span>
+                        </div>
+                    </div>
+                    <div class="card-particles"></div>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <h3>Aucune promotion disponible</h3>
+            <p>Créez d'abord une promotion dans l'administration Django</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.promotion-card');
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
+});
+</script>
+{% endblock %}
+

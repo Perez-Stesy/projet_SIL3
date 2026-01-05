@@ -68,7 +68,7 @@ Une interface web moderne et élégante permettant au directeur de consulter et 
 - 📝 **Secrétaire** : Personnel administratif
 - ❓ **Autre** : Rôles personnalisés
 
-## � **Fonctionnalités HTML/CSS Avancées**
+## 🎯 **Fonctionnalités HTML/CSS Avancées**
 
 ### Interface Interactive
 - **Animations CSS** : Transitions fluides, effets hover, animations d'entrée

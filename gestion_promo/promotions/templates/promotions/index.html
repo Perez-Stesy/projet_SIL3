@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Promotions - Interface Moderne</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Background Animated -->
+    <div class="background-animation">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">
+                    <span class="title-icon">🎓</span>
+                    Gestion des Promotions
+                </h1>
+                <p class="subtitle">Créez et gérez vos promotions académiques avec style</p>
+            </div>
+        </header>
+
+        <!-- Floating Action Button -->
+        <button class="fab" id="fabBtn" aria-label="Créer une promotion">
+            <span class="fab-icon">+</span>
+        </button>
+
+        <!-- Modal pour créer une promotion -->
+        <div class="modal" id="createModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Créer une Nouvelle Promotion</h2>
+                    <button class="close-btn" id="closeModal">&times;</button>
+                </div>
+                <form id="promotionForm" class="promotion-form">
+                    <input type="hidden" id="promotionId" name="promotion_id">
+                    <div class="form-group">
+                        <label for="nom">Nom de la Promotion *</label>
+                        <input type="text" id="nom" name="nom" required 
+                               placeholder="Ex: Master Informatique 2024-2025">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="annee">Année *</label>
+                        <input type="number" id="annee" name="annee" required 
+                               min="2000" max="2100" 
+                               placeholder="2024">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date_debut">Date de début *</label>
+                            <input type="date" id="date_debut" name="date_debut" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date_fin">Date de fin *</label>
+                            <input type="date" id="date_fin" name="date_fin" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="4" 
+                                  placeholder="Description détaillée de la promotion..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="couleur">Couleur de la promotion</label>
+                        <div class="color-picker-container">
+                            <input type="color" id="couleur" name="couleur" value="#6366f1">
+                            <input type="text" id="couleur-text" value="#6366f1" 
+                                   pattern="^#[0-9A-Fa-f]{6}$">
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="active" name="active" checked>
+                            <span>Promotion active</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group" id="nombreEtudiantsGroup" style="display: none;">
+                        <label for="nombre_etudiants">Nombre d'étudiants inscrits *</label>
+                        <input type="number" id="nombre_etudiants" name="nombre_etudiants" 
+                               min="0" value="0" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelBtn">Annuler</button>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="btn-text" id="submitBtnText">Créer la Promotion</span>
+                            <span class="btn-loader"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Promotions Grid -->
+        <div class="promotions-section">
+            <div class="section-header">
+                <h2>Promotions</h2>
+                <div class="filter-controls">
+                    <button class="filter-btn active" data-filter="all">Toutes</button>
+                    <button class="filter-btn" data-filter="active">Actives</button>
+                    <button class="filter-btn" data-filter="inactive">Inactives</button>
+                </div>
+            </div>
+
+            <div id="promotionsGrid" class="promotions-grid">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Chargement des promotions...</p>
+                </div>
+            </div>
+
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <div class="empty-icon">📚</div>
+                <h3>Aucune promotion</h3>
+                <p>Créez votre première promotion pour commencer</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>
+

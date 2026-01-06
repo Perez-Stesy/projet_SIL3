@@ -107,47 +107,6 @@
             transform: translateY(0);
         }
 
-        .divider {
-            margin: 20px 0;
-            color: #666;
-            font-size: 0.9rem;
-            position: relative;
-        }
-
-        .divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: #e1e5e9;
-        }
-
-        .divider span {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 0 15px;
-        }
-
-        .guest-btn {
-            width: 100%;
-            padding: 12px;
-            background: transparent;
-            color: #667eea;
-            border: 2px solid #667eea;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .guest-btn:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-1px);
-        }
-
         .forgot-password {
             margin-top: 15px;
             font-size: 0.85rem;
@@ -234,14 +193,6 @@
             <button type="submit" class="login-btn">Se connecter</button>
         </form>
 
-        <div class="divider">
-            <span>ou</span>
-        </div>
-
-        <button type="button" class="guest-btn" onclick="loginAsGuest()">
-            Accéder en tant qu'invité
-        </button>
-
         <div class="forgot-password">
             <a href="#" onclick="forgotPassword()">Mot de passe oublié ?</a>
         </div>
@@ -275,13 +226,6 @@
                 showError();
             }
         });
-
-        function loginAsGuest() {
-            showSuccess();
-            setTimeout(() => {
-                window.location.href = 'interface_simple.html';
-            }, 1500);
-        }
 
         function forgotPassword() {
             alert('Fonctionnalité à implémenter : Contactez l\'administrateur système.');

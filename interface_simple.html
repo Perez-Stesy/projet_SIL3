@@ -564,21 +564,44 @@
                 <span class="card-icon">📚</span>
                 <div class="card-title">Salle de Formation</div>
                 <div class="card-description">Salle dédiée aux formations professionnelles et ateliers.</div>
+                <div class="card-actions">
+                    <button class="action-btn edit" onclick="event.stopPropagation(); editSpace('Salle de Formation')">
+                        ✏️ Modifier
+                    </button>
+                    <button class="action-btn delete" onclick="event.stopPropagation(); deleteSpace('Salle de Formation')">
+                        🗑️ Supprimer
+                    </button>
+                    <button class="action-btn add" onclick="event.stopPropagation(); addSubspace('Salle de Formation')">
+                        ➕ Sous-espace
+                    </button>
+                </div>
                 <div class="subspaces">
                     <div class="subspace-item" onclick="selectSubspace('Salle de Formation - Atelier1')">
                         <span class="subspace-icon">🎯</span>
                         <div class="subspace-name">Atelier Management</div>
                         <div class="subspace-users">8 utilisateurs</div>
+                        <div class="subspace-actions">
+                            <button class="action-btn edit" onclick="event.stopPropagation(); editSubspace('Atelier Management')" style="font-size: 0.7rem; padding: 4px 8px;">✏️</button>
+                            <button class="action-btn delete" onclick="event.stopPropagation(); deleteSubspace('Atelier Management')" style="font-size: 0.7rem; padding: 4px 8px;">🗑️</button>
+                        </div>
                     </div>
                     <div class="subspace-item" onclick="selectSubspace('Salle de Formation - Atelier2')">
                         <span class="subspace-icon">💼</span>
                         <div class="subspace-name">Atelier Communication</div>
                         <div class="subspace-users">6 utilisateurs</div>
+                        <div class="subspace-actions">
+                            <button class="action-btn edit" onclick="event.stopPropagation(); editSubspace('Atelier Communication')" style="font-size: 0.7rem; padding: 4px 8px;">✏️</button>
+                            <button class="action-btn delete" onclick="event.stopPropagation(); deleteSubspace('Atelier Communication')" style="font-size: 0.7rem; padding: 4px 8px;">🗑️</button>
+                        </div>
                     </div>
                     <div class="subspace-item" onclick="selectSubspace('Salle de Formation - Conf')">
                         <span class="subspace-icon">🎤</span>
                         <div class="subspace-name">Salle de Conférence</div>
                         <div class="subspace-users">12 utilisateurs</div>
+                        <div class="subspace-actions">
+                            <button class="action-btn edit" onclick="event.stopPropagation(); editSubspace('Salle de Conférence')" style="font-size: 0.7rem; padding: 4px 8px;">✏️</button>
+                            <button class="action-btn delete" onclick="event.stopPropagation(); deleteSubspace('Salle de Conférence')" style="font-size: 0.7rem; padding: 4px 8px;">🗑️</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -587,21 +610,44 @@
                 <span class="card-icon">🔧</span>
                 <div class="card-title">Atelier Technique</div>
                 <div class="card-description">Espace pour les travaux pratiques et maintenance.</div>
+                <div class="card-actions">
+                    <button class="action-btn edit" onclick="event.stopPropagation(); editSpace('Atelier Technique')">
+                        ✏️ Modifier
+                    </button>
+                    <button class="action-btn delete" onclick="event.stopPropagation(); deleteSpace('Atelier Technique')">
+                        🗑️ Supprimer
+                    </button>
+                    <button class="action-btn add" onclick="event.stopPropagation(); addSubspace('Atelier Technique')">
+                        ➕ Sous-espace
+                    </button>
+                </div>
                 <div class="subspaces">
                     <div class="subspace-item" onclick="selectSubspace('Atelier Technique - Électronique')">
                         <span class="subspace-icon">🔌</span>
                         <div class="subspace-name">Électronique</div>
                         <div class="subspace-users">4 utilisateurs</div>
+                        <div class="subspace-actions">
+                            <button class="action-btn edit" onclick="event.stopPropagation(); editSubspace('Électronique')" style="font-size: 0.7rem; padding: 4px 8px;">✏️</button>
+                            <button class="action-btn delete" onclick="event.stopPropagation(); deleteSubspace('Électronique')" style="font-size: 0.7rem; padding: 4px 8px;">🗑️</button>
+                        </div>
                     </div>
                     <div class="subspace-item" onclick="selectSubspace('Atelier Technique - Mécanique')">
                         <span class="subspace-icon">⚙️</span>
                         <div class="subspace-name">Mécanique</div>
                         <div class="subspace-users">3 utilisateurs</div>
+                        <div class="subspace-actions">
+                            <button class="action-btn edit" onclick="event.stopPropagation(); editSubspace('Mécanique')" style="font-size: 0.7rem; padding: 4px 8px;">✏️</button>
+                            <button class="action-btn delete" onclick="event.stopPropagation(); deleteSubspace('Mécanique')" style="font-size: 0.7rem; padding: 4px 8px;">🗑️</button>
+                        </div>
                     </div>
                     <div class="subspace-item" onclick="selectSubspace('Atelier Technique - Soudure')">
                         <span class="subspace-icon">🔥</span>
                         <div class="subspace-name">Soudure</div>
                         <div class="subspace-users">2 utilisateurs</div>
+                        <div class="subspace-actions">
+                            <button class="action-btn edit" onclick="event.stopPropagation(); editSubspace('Soudure')" style="font-size: 0.7rem; padding: 4px 8px;">✏️</button>
+                            <button class="action-btn delete" onclick="event.stopPropagation(); deleteSubspace('Soudure')" style="font-size: 0.7rem; padding: 4px 8px;">🗑️</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -610,21 +656,44 @@
                 <span class="card-icon">👨‍🏫</span>
                 <div class="card-title">Espace Formateur</div>
                 <div class="card-description">Salle dédiée aux formateurs pour préparer et animer les cours.</div>
+                <div class="card-actions">
+                    <button class="action-btn edit" onclick="event.stopPropagation(); editSpace('Espace Formateur')">
+                        ✏️ Modifier
+                    </button>
+                    <button class="action-btn delete" onclick="event.stopPropagation(); deleteSpace('Espace Formateur')">
+                        🗑️ Supprimer
+                    </button>
+                    <button class="action-btn add" onclick="event.stopPropagation(); addSubspace('Espace Formateur')">
+                        ➕ Sous-espace
+                    </button>
+                </div>
                 <div class="subspaces">
                     <div class="subspace-item" onclick="selectSubspace('Espace Formateur - Bureau1')">
                         <span class="subspace-icon">🖥️</span>
                         <div class="subspace-name">Bureau Principal</div>
                         <div class="subspace-users">2 formateurs</div>
+                        <div class="subspace-actions">
+                            <button class="action-btn edit" onclick="event.stopPropagation(); editSubspace('Bureau Principal')" style="font-size: 0.7rem; padding: 4px 8px;">✏️</button>
+                            <button class="action-btn delete" onclick="event.stopPropagation(); deleteSubspace('Bureau Principal')" style="font-size: 0.7rem; padding: 4px 8px;">🗑️</button>
+                        </div>
                     </div>
                     <div class="subspace-item" onclick="selectSubspace('Espace Formateur - Préparation')">
                         <span class="subspace-icon">📝</span>
                         <div class="subspace-name">Salle de Préparation</div>
                         <div class="subspace-users">3 formateurs</div>
+                        <div class="subspace-actions">
+                            <button class="action-btn edit" onclick="event.stopPropagation(); editSubspace('Salle de Préparation')" style="font-size: 0.7rem; padding: 4px 8px;">✏️</button>
+                            <button class="action-btn delete" onclick="event.stopPropagation(); deleteSubspace('Salle de Préparation')" style="font-size: 0.7rem; padding: 4px 8px;">🗑️</button>
+                        </div>
                     </div>
                     <div class="subspace-item" onclick="selectSubspace('Espace Formateur - Réunions')">
                         <span class="subspace-icon">👥</span>
                         <div class="subspace-name">Salle de Réunions</div>
                         <div class="subspace-users">5 formateurs</div>
+                        <div class="subspace-actions">
+                            <button class="action-btn edit" onclick="event.stopPropagation(); editSubspace('Salle de Réunions')" style="font-size: 0.7rem; padding: 4px 8px;">✏️</button>
+                            <button class="action-btn delete" onclick="event.stopPropagation(); deleteSubspace('Salle de Réunions')" style="font-size: 0.7rem; padding: 4px 8px;">🗑️</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -633,21 +702,44 @@
                 <span class="card-icon">👨‍🎓</span>
                 <div class="card-title">Espace Étudiant</div>
                 <div class="card-description">Zone réservée aux étudiants pour l'étude et les travaux de groupe.</div>
+                <div class="card-actions">
+                    <button class="action-btn edit" onclick="event.stopPropagation(); editSpace('Espace Étudiant')">
+                        ✏️ Modifier
+                    </button>
+                    <button class="action-btn delete" onclick="event.stopPropagation(); deleteSpace('Espace Étudiant')">
+                        🗑️ Supprimer
+                    </button>
+                    <button class="action-btn add" onclick="event.stopPropagation(); addSubspace('Espace Étudiant')">
+                        ➕ Sous-espace
+                    </button>
+                </div>
                 <div class="subspaces">
                     <div class="subspace-item" onclick="selectSubspace('Espace Étudiant - Bibliothèque')">
                         <span class="subspace-icon">📚</span>
                         <div class="subspace-name">Bibliothèque</div>
                         <div class="subspace-users">15 étudiants</div>
+                        <div class="subspace-actions">
+                            <button class="action-btn edit" onclick="event.stopPropagation(); editSubspace('Bibliothèque')" style="font-size: 0.7rem; padding: 4px 8px;">✏️</button>
+                            <button class="action-btn delete" onclick="event.stopPropagation(); deleteSubspace('Bibliothèque')" style="font-size: 0.7rem; padding: 4px 8px;">🗑️</button>
+                        </div>
                     </div>
                     <div class="subspace-item" onclick="selectSubspace('Espace Étudiant - Groupe1')">
                         <span class="subspace-icon">👥</span>
                         <div class="subspace-name">Salle de Groupe A</div>
                         <div class="subspace-users">8 étudiants</div>
+                        <div class="subspace-actions">
+                            <button class="action-btn edit" onclick="event.stopPropagation(); editSubspace('Salle de Groupe A')" style="font-size: 0.7rem; padding: 4px 8px;">✏️</button>
+                            <button class="action-btn delete" onclick="event.stopPropagation(); deleteSubspace('Salle de Groupe A')" style="font-size: 0.7rem; padding: 4px 8px;">🗑️</button>
+                        </div>
                     </div>
                     <div class="subspace-item" onclick="selectSubspace('Espace Étudiant - Groupe2')">
                         <span class="subspace-icon">👥</span>
                         <div class="subspace-name">Salle de Groupe B</div>
                         <div class="subspace-users">6 étudiants</div>
+                        <div class="subspace-actions">
+                            <button class="action-btn edit" onclick="event.stopPropagation(); editSubspace('Salle de Groupe B')" style="font-size: 0.7rem; padding: 4px 8px;">✏️</button>
+                            <button class="action-btn delete" onclick="event.stopPropagation(); deleteSubspace('Salle de Groupe B')" style="font-size: 0.7rem; padding: 4px 8px;">🗑️</button>
+                        </div>
                     </div>
                 </div>
             </div>

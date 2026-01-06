@@ -329,9 +329,37 @@
             text-align: center;
         }
 
-        .confirm-dialog p {
-            margin-bottom: 20px;
-            color: #666;
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+            background: linear-gradient(135deg, #c82333 0%, #a02622 100%);
+        }
+
+        .logout-btn:active {
+            transform: translateY(0);
+        }
+
+        .container {
+            position: relative;
         }
 
         .stats {
@@ -445,6 +473,10 @@
 </head>
 <body>
     <div class="container">
+        <button class="logout-btn" onclick="logout()">
+            🚪 Déconnexion
+        </button>
+
         <h1>CONSULTATION DES ESPACES PEDAGOGIQUES</h1>
         <p class="subtitle">DIRECTEUR</p>
 
@@ -1005,6 +1037,16 @@
                     modal.style.display = 'none';
                 }
             });
+        }
+
+        // Fonction de déconnexion
+        function logout() {
+            if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+                showMessage('Déconnexion en cours...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1000);
+            }
         }
     </script>
 

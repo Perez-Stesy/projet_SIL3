@@ -1,0 +1,273 @@
+════════════════════════════════════════════════════════════════════════════════
+                        🚂 RAILWAY.APP DEPLOYMENT
+                      Déploiement ultra-simple en 10 min
+════════════════════════════════════════════════════════════════════════════════
+
+✨ POURQUOI RAILWAY.APP?
+════════════════════════════════════════════════════════════════════════════════
+
+✅ Gratuit (crédits inclus)
+✅ Très facile (Interface web simple)
+✅ HTTPS automatique
+✅ Domaine auto
+✅ PostgreSQL intégré
+✅ Redéploiement auto au push Git
+✅ Monitoring inclus
+✅ Support excellent
+
+
+🚀 DÉMARRAGE EN 3 ÉTAPES
+════════════════════════════════════════════════════════════════════════════════
+
+ÉTAPE 1: Créer un compte
+─────────────────────────
+1. Allez sur: https://railway.app
+2. Cliquez "Sign up"
+3. Choisissez GitHub
+4. Autorisez Railway
+5. ✅ Compte créé!
+
+
+ÉTAPE 2: Pousser le code sur GitHub
+────────────────────────────────────
+Commandes:
+  git remote add origin https://github.com/VOUS/plateforme-pedagogique.git
+  git branch -M main
+  git push -u origin main
+
+Ou si le repo existe:
+  git push origin main
+
+✅ Code poussé!
+
+
+ÉTAPE 3: Déployer sur Railway
+──────────────────────────────
+1. Allez sur: https://railway.app/dashboard
+2. Cliquez "New Project"
+3. "Deploy from GitHub"
+4. Autorisez Railway
+5. Sélectionnez votre repo
+6. ✅ Déploiement lancé!
+
+
+📋 CONFIGURATION RAILWAY
+════════════════════════════════════════════════════════════════════════════════
+
+After deploying:
+
+1. AJOUTER POSTGRESQL
+   ├─ Dashboard → "Add Service"
+   ├─ Cherchez "PostgreSQL"
+   ├─ Cliquez "Deploy"
+   └─ ✅ Base liée automatiquement!
+
+2. CONFIGURER LES VARIABLES
+   ├─ Backend → "Variables"
+   ├─ Ajouter:
+   │  DEBUG=False
+   │  SECRET_KEY=your-secret-key
+   │  ALLOWED_HOSTS=*.railway.app,localhost
+   └─ ✅ Sauvegardé!
+
+3. EXÉCUTER MIGRATIONS
+   ├─ Installer: npm install -g @railway/cli
+   ├─ Login: railway login
+   ├─ Migrations: railway run python manage.py migrate
+   ├─ Admin: railway run python manage.py createsuperuser
+   └─ ✅ Base configurée!
+
+
+🌐 ACCÉDER À VOTRE APP
+════════════════════════════════════════════════════════════════════════════════
+
+URL auto-générée:
+  https://plateforme-pedagogique-production.up.railway.app
+
+Services:
+  Frontend: https://votre-app.railway.app
+  Backend:  https://votre-app.railway.app/api/
+  Admin:    https://votre-app.railway.app/admin/
+
+
+✅ CHECKLIST DEPLOYMENT
+════════════════════════════════════════════════════════════════════════════════
+
+✓ Compte Railway créé
+✓ Code pushé sur GitHub
+✓ Projet créé dans Railway
+✓ PostgreSQL ajoutée
+✓ Variables configurées
+✓ Migrations exécutées
+✓ Superuser créé
+✓ URL accessible
+✓ Frontend charge
+✓ API répond
+✓ Admin fonctionne
+✓ Authentification OK
+
+
+📊 TESTS POST-DÉPLOIEMENT
+════════════════════════════════════════════════════════════════════════════════
+
+Test 1: Frontend charge
+  curl https://votre-app.railway.app
+  → Doit retourner le HTML
+
+Test 2: API répond
+  curl https://votre-app.railway.app/api/accounts/me/
+  → Doit retourner: {"detail":"Authentication credentials were not provided."}
+
+Test 3: Admin accessible
+  Allez sur: https://votre-app.railway.app/admin/
+  → Connexion avec identifiants superuser
+
+Test 4: Authentification
+  1. Allez sur: https://votre-app.railway.app
+  2. Créez un directeur
+  3. Connectez-vous
+  4. Accédez au dashboard
+
+
+📊 COMMANDES ESSENTIELLES
+════════════════════════════════════════════════════════════════════════════════
+
+Connexion:
+  railway login
+
+Initialiser projet:
+  railway init
+
+Déployer:
+  railway up
+
+Redéployer:
+  railway redeploy
+
+Voir logs:
+  railway logs -f
+
+Variables:
+  railway vars
+
+Exécuter commande Django:
+  railway run python manage.py migrate
+  railway run python manage.py createsuperuser
+  railway run python manage.py collectstatic
+
+Arrêter l'app:
+  railway down
+
+
+🔍 MONITORING & LOGS
+════════════════════════════════════════════════════════════════════════════════
+
+Via Railway CLI:
+  railway logs -f          # Logs backend
+  railway logs -f --service backend
+
+Via Dashboard:
+  1. Sélectionnez votre projet
+  2. Cliquez "Deployments"
+  3. Cliquez "View Logs"
+
+
+⚙️ REDÉPLOIEMENT AUTOMATIQUE
+════════════════════════════════════════════════════════════════════════════════
+
+Chaque fois que vous poussez du code:
+  git add .
+  git commit -m "Message"
+  git push origin main
+
+Railway détecte automatiquement et redéploie! ✅
+
+
+🆘 PROBLÈMES COURANTS
+════════════════════════════════════════════════════════════════════════════════
+
+Erreur 502 Bad Gateway:
+  → Vérifier les logs: railway logs -f
+  → Vérifier migrations: railway run python manage.py migrate
+  → Redéployer: railway redeploy
+
+Port incorrect:
+  → Railway utilise PORT 8000 par défaut
+  → Vérifier la configuration Dockerfile
+
+CORS error:
+  → Ajouter domaine à ALLOWED_HOSTS
+  → Voir backend/settings.py
+
+Base de données inaccessible:
+  → Vérifier DATABASE_URL dans Variables
+  → Réinitialiser: railway run python manage.py migrate --noinput
+
+
+💰 COÛTS
+════════════════════════════════════════════════════════════════════════════════
+
+Railway Pricing:
+  • Gratuit: $5 crédit/mois
+  • Après: Pay-as-you-go
+  • Estimation pour votre projet:
+    - Backend: ~$2-4/mois
+    - PostgreSQL: ~$1-2/mois
+    - Total: ~$3-6/mois
+
+Pour une école = TRÈS ABORDABLE! ✅
+
+
+🎯 DOMAINE CUSTOM (OPTIONNEL)
+════════════════════════════════════════════════════════════════════════════════
+
+1. Acheter domaine (namecheap, godaddy)
+2. Dashboard Railway → "Domain"
+3. "Add Domain"
+4. Entrer votre domaine
+5. Configurer DNS records
+6. Attendre 24h pour propagation
+
+
+📞 RESSOURCES & SUPPORT
+════════════════════════════════════════════════════════════════════════════════
+
+Documentation: https://docs.railway.app/
+Discord: https://railway.app/support
+Email: support@railway.app
+
+Guides spécifiques:
+  • Django: https://docs.railway.app/guides/django
+  • React: https://docs.railway.app/guides/vite
+  • PostgreSQL: https://docs.railway.app/databases/postgresql
+
+
+📚 FICHIERS DE CONFIGURATION
+════════════════════════════════════════════════════════════════════════════════
+
+✅ Dockerfile.railway       - Dockerfile optimisé
+✅ railway.toml             - Configuration Railway
+✅ RAILWAY_DEPLOYMENT.md    - Guide complet
+✅ RAILWAY_QUICK.md         - Démarrage rapide
+✅ deploy-railway.sh        - Script automatisé
+
+
+✨ PROCHAINES ÉTAPES
+════════════════════════════════════════════════════════════════════════════════
+
+1. ✅ Tester que tout fonctionne
+2. 📧 Configurer Email (optionnel)
+3. 🔐 Configurer SSL (automatique)
+4. 📊 Ajouter monitoring
+5. 💾 Configurer backups quotidiens
+6. 🔗 Ajouter domaine custom
+
+
+════════════════════════════════════════════════════════════════════════════════
+
+                        🚀 PRÊT À DÉPLOYER?
+
+                   Consultez RAILWAY_QUICK.md pour
+                        commencer immédiatement!
+
+════════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,16 @@
+# railway.toml - Configuration pour Railway.app
+# Docs: https://docs.railway.app/
+
+[build]
+builder = "dockerfile"
+dockerfilePath = "./Dockerfile.railway"
+
+[deploy]
+startCommand = "gunicorn backend.wsgi:application"
+restartPolicyMaxRetries = 5
+
+[[services]]
+name = "frontend"
+source = "frontend"
+buildCommand = "npm install && npm run build"
+startCommand = "npx serve -s dist -p $PORT"

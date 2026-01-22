@@ -1,0 +1,56 @@
+╔══════════════════════════════════════════════════════════════╗
+║   GUIDE DE DÉMARRAGE RAPIDE - PLATEFORME PÉDAGOGIQUE        ║
+╚══════════════════════════════════════════════════════════════╝
+
+📋 PRÉREQUIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✓ Python 3.11+ installé (https://www.python.org/downloads/)
+✓ Node.js 18+ installé (https://nodejs.org/)
+✓ PostgreSQL (optionnel - SQLite sera utilisé par défaut)
+
+🚀 DÉMARRAGE EN 3 ÉTAPES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MÉTHODE 1 : Démarrer les deux services en même temps (RECOMMANDÉ)
+──────────────────────────────────────────────────────────────────
+1. Double-cliquez sur le fichier : start-all.bat
+   → Cela ouvrira automatiquement le backend et le frontend
+
+MÉTHODE 2 : Démarrer séparément
+──────────────────────────────────────────────────────────────────
+BACKEND :
+1. Double-cliquez sur : backend/start.bat
+   → Le backend sera sur http://127.0.0.1:8000
+
+FRONTEND :
+1. Double-cliquez sur : frontend/start.bat
+   → Le frontend sera sur http://localhost:5173
+
+✅ VÉRIFICATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✓ Backend : http://127.0.0.1:8000/admin
+✓ Frontend : http://localhost:5173
+✓ API : http://127.0.0.1:8000/api
+
+👤 CRÉER UN COMPTE DIRECTEUR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Une fois le backend démarré, dans un nouveau terminal :
+  cd backend
+  python manage.py createsuperuser
+
+🐛 PROBLÈMES COURANTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❌ "Python non trouvé"
+   → Installez Python et cochez "Add to PATH"
+
+❌ "Node.js non trouvé"
+   → Installez Node.js depuis nodejs.org
+
+❌ "Port déjà utilisé"
+   → Fermez l'application qui utilise le port 8000 ou 5173
+
+❌ "Module non trouvé"
+   → Backend : pip install -r requirements.txt
+   → Frontend : npm install
+
+📖 Pour plus de détails, consultez : GUIDE_DEMARRAGE.md

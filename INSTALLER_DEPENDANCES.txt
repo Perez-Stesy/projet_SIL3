@@ -1,0 +1,69 @@
+╔══════════════════════════════════════════════════════════════╗
+║     RÉSOLUTION DE L'ERREUR : ModuleNotFoundError            ║
+╚══════════════════════════════════════════════════════════════╝
+
+❌ ERREUR : ModuleNotFoundError: No module named 'dotenv'
+
+✅ SOLUTION : Installer toutes les dépendances Python
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 COMMANDES À EXÉCUTER (dans le terminal où vous êtes)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Assurez-vous que l'environnement virtuel est activé
+   (Vous devriez voir "(venv)" au début de votre ligne de commande)
+
+2. Installez toutes les dépendances :
+   
+   pip install -r ..\requirements.txt
+
+   OU si ça ne marche pas :
+   
+   python -m pip install -r ..\requirements.txt
+
+3. Vérifiez l'installation :
+   
+   pip list | findstr dotenv
+
+4. Relancez les migrations :
+   
+   python manage.py migrate
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 SI L'ENVIRONNEMENT VIRTUEL N'EST PAS ACTIVÉ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Si vous ne voyez pas "(venv)" au début de votre ligne :
+
+1. Activez l'environnement virtuel :
+   
+   ..\venv\Scripts\activate
+
+2. Puis installez les dépendances :
+   
+   pip install -r ..\requirements.txt
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📦 DÉPENDANCES À INSTALLER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Les packages suivants seront installés :
+- Django
+- djangorestframework
+- djangorestframework-simplejwt
+- django-cors-headers
+- python-dotenv
+- psycopg2-binary
+- Et autres...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ APRÈS L'INSTALLATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Une fois les dépendances installées, vous pourrez :
+
+1. Appliquer les migrations :
+   python manage.py migrate
+
+2. Lancer le serveur :
+   python manage.py runserver
